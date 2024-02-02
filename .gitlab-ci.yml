@@ -10,7 +10,7 @@ include: https://gitlab-templates.ddbuild.io/compute-delivery/v2/compute-deliver
 build-docker-image:
   extends:
   - .build-docker-image
-  tags: [ "runner:docker" ]
+  tags: [ "arch:arm64" ]
   only:
     - branches
   timeout: 6h
