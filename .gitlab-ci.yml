@@ -10,17 +10,17 @@ include: https://gitlab-templates.ddbuild.io/compute-delivery/v2/compute-deliver
 build-docker-image:
   extends:
   - .build-docker-image
-  tags: [ "runner:docker-arm" ]
+  tags: [ "runner:docker" ]
   only:
     - branches
   variables:
     IMAGE_NAME: cloud-controller-manager/aws
     BUILDER_IMAGE: "images/mirror/golang:1.21"
     IMAGE_TAG: v0.0.1-alpha.1
-    PLATFORMS: "linux/arm64"
+    #PLATFORMS: "linux/arm64"
   script:
   - METADATA_FILE=$(mktemp)
-  - docker buildx build --platform "linux/arm64" --tag "registry.ddbuild.io/cloud-controller-manager/aws:v0.0.1-alpha.1" --build-arg="BUILDER_IMAGE=registry.ddbuild.io/images/mirror/golang:1.21" --build-arg="BASE_IMAGE=registry.ddbuild.io/images/base/gbi-$BASE_IMAGE:release" --label target=prod $EXTRA_ARGS --push --metadata-file ${METADATA_FILE} "$CONTEXT_DIR"
+  - docker buildx build --platform "linux/amd64,linux/arm64" --tag "registry.ddbuild.io/cloud-controller-manager/aws:v0.0.1-alpha.1" --build-arg="BUILDER_IMAGE=registry.ddbuild.io/images/mirror/golang:1.21" --build-arg="BASE_IMAGE=registry.ddbuild.io/images/base/gbi-$BASE_IMAGE:release" --label target=prod $EXTRA_ARGS --push --metadata-file ${METADATA_FILE} "$CONTEXT_DIR"
 
 
 run-campaign:
