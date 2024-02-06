@@ -24,7 +24,7 @@ ARG BASE_IMAGE
 ################################################################################
 # Build the manager as a statically compiled binary so it has no dependencies
 # libc, muscl, etc.
-FROM --platform=linux/amd64 ${GOLANG_IMAGE} as builder
+FROM ${GOLANG_IMAGE} as builder
 
 ARG GOPROXY=https://goproxy.io,direct
 ARG TARGETOS
